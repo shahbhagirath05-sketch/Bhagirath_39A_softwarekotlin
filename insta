@@ -1,0 +1,305 @@
+package com.example.firstproject
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.firstproject.ui.theme.FirstprojectTheme
+
+class ProfileActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            FirstprojectTheme {
+                ProfileBody()
+            }
+        }
+    }
+}
+
+@Composable
+fun ProfileBody() {
+    val blueInstagram = Color(0xFF0095F6)
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+            .padding(top = 24.dp)
+    ) {
+        // Top Bar
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                contentDescription = "Back",
+                modifier = Modifier.size(24.dp)
+            )
+
+            Text(
+                text = "username",
+                style = TextStyle(
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            )
+
+            Icon(
+                painter = painterResource(R.drawable.baseline_more_horiz_24),
+                contentDescription = "More",
+                modifier = Modifier.size(24.dp)
+            )
+        }
+
+        // Profile Header: Image + Stats
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Profile Picture with gradient/ring border
+            Image(
+                painter = painterResource(R.drawable.image),
+                contentDescription = "Profile Picture",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(86.dp)
+                    .clip(CircleShape)
+                    .border(3.dp, Color(0xFFE1306C), CircleShape)
+                    .padding(3.dp)
+                    .clip(CircleShape)
+            )
+
+            Row(
+                modifier = Modifier.weight(1f),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = "120",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                    Text("Posts", fontSize = 13.sp, color = Color.DarkGray)
+                }
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = "1.1M",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                    Text("Followers", fontSize = 13.sp, color = Color.DarkGray)
+                }
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = "450",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                    Text("Following", fontSize = 13.sp, color = Color.DarkGray)
+                }
+            }
+        }
+
+        // Bio Section
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 4.dp),
+            verticalArrangement = Arrangement.spacedBy(2.dp)
+        ) {
+            Text(
+                text = "Username",
+                fontWeight = FontWeight.Bold,
+                fontSize = 14.sp
+            )
+            Text(
+                text = "@Bhagirath shah",
+                fontSize = 13.sp,
+                color = Color.Black
+            )
+            Text(
+                text = "Link goes here",
+                fontSize = 13.sp,
+                color = Color(0xFF00376B),
+                fontWeight = FontWeight.Medium
+            )
+            Text(
+                text = buildAnnotatedString {
+                    append("Followed by ")
+                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                        append("username")
+                    }
+                    append(" and ")
+                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                        append("username")
+                    }
+                },
+                fontSize = 13.sp,
+                color = Color.DarkGray
+            )
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        // Main Button ("Button")
+        OutlinedButton(
+            onClick = {},
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            shape = RoundedCornerShape(6.dp),
+            border = BorderStroke(1.dp, Color.LightGray),
+            colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black)
+        ) {
+            Text(text = "Button", fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Action Buttons Row (Follow, Message, Email, Dropdown)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Button(
+                onClick = {},
+                modifier = Modifier
+                    .weight(1f)
+                    .height(36.dp),
+                shape = RoundedCornerShape(6.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = blueInstagram),
+                contentPadding = PaddingValues(0.dp)
+            ) {
+                Text(text = "Follow", color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
+            }
+
+            OutlinedButton(
+                onClick = {},
+                modifier = Modifier
+                    .weight(1f)
+                    .height(36.dp),
+                shape = RoundedCornerShape(6.dp),
+                border = BorderStroke(1.dp, Color.LightGray),
+                colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black),
+                contentPadding = PaddingValues(0.dp)
+            ) {
+                Text(text = "Message", fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
+            }
+
+            OutlinedButton(
+                onClick = {},
+                modifier = Modifier
+                    .weight(1f)
+                    .height(36.dp),
+                shape = RoundedCornerShape(6.dp),
+                border = BorderStroke(1.dp, Color.LightGray),
+                colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black),
+                contentPadding = PaddingValues(0.dp)
+            ) {
+                Text(text = "Email", fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
+            }
+
+            OutlinedButton(
+                onClick = {},
+                modifier = Modifier
+                    .width(36.dp)
+                    .height(36.dp),
+                shape = RoundedCornerShape(6.dp),
+                border = BorderStroke(1.dp, Color.LightGray),
+                colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black),
+                contentPadding = PaddingValues(0.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowDown,
+                    contentDescription = "More actions",
+                    modifier = Modifier.size(18.dp)
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(14.dp))
+
+        // Stories Row (Story 1 to Story 5)
+        val stories = listOf("Story 1", "Story 2", "Story 3", "Story 4", "Story 5")
+        LazyRow(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            items(stories) { storyTitle ->
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.image),
+                        contentDescription = storyTitle,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(64.dp)
+                            .clip(CircleShape)
+                            .border(1.dp, Color.LightGray, CircleShape)
+                            .padding(2.dp)
+                            .clip(CircleShape)
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = storyTitle,
+                        fontSize = 12.sp,
+                        color = Color.Black
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProfileBodyPreview() {
+    FirstprojectTheme {
+        ProfileBody()
+    }
+}
